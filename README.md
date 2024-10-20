@@ -20,8 +20,44 @@
 > > - [Estableciendo/Conexion-puerto-4000](https://github.com/MilVG/app-uptask-backend-ts/commit/530b272f94e2d5c70b8cfe4c5172bb633db5f240)
 > > - [Definicion/Eejecucion-package.json](https://github.com/MilVG/app-uptask-backend-ts/commit/936919ec18f2a9a32a1fc9189d6f0108f83cbd53)
 > > ### - Añadiendo Colores
-> >
+> > - [Instalacion/Dependencia-Colors](https://github.com/MilVG/app-uptask-backend-ts/commit/480ba50ff3c046af2c3b5734ce4780a9d0c0d0f8)
+> > - [Incorporacion/Colores-mensajes-consola](https://github.com/MilVG/app-uptask-backend-ts/commit/a0bb296c4706f4a9218e507169b85fa00134cb72)
 > > ### - Obtener una base de datos en MongoBD Atlas
+> > - [Creacion/Cuenta-MongoDB](https://cloud.mongodb.com/)
+> ```zsh
+> -- Comand Instalacion Arch Linux
+> -- Instalacion mongodb
+> yay -S mongodb-bin
+> 
+> ```
+>
+> ```zsh
+> -- activar servicio
+> sudo systemctl start mongodb.service
+> sudo systemctl enable mongodb.service
+> 
+> ```
+>
+> ```zsh
+> -- instalacion servicio de conexion
+> yay -S mongosh-bin
+> 
+> ```
+>
+> ```zsh
+> -- Conectar mongodb desde la terminal
+> mongosh "mongodb+srv://cluster0.xxxxx.mongodb.net/myFirstDatabase" --username tu_usuario
+> 
+> ```
+>
 > > ### - ¿Qué es Mongoose?
+> > ```text
+> > Mongoose es un ODM (Object Data Modeling) que agrega una capa 
+> > de abstracción sobre MongoDB y es ideal cuando necesitas 
+> > estructurar y gestionar datos con esquemas definidos.
+> > En resumen es un intermediario para gestionar datos con
+> > mongoDB.
+> > ```
+> > - [Cuando_Utilizar/Mongoose&&mongodb](https://chatgpt.com/share/67152984-239c-8002-a5bb-3ab77ec57241)
 > > ### - Conectando nuestra app con MongoDB
 
