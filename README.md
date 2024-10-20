@@ -59,5 +59,10 @@
 > > mongoDB.
 > > ```
 > > - [Cuando_Utilizar/Mongoose&&mongodb](https://chatgpt.com/share/67152984-239c-8002-a5bb-3ab77ec57241)
+> > - [Instalacion/Dependencia-mongoose&&dotenv](https://github.com/MilVG/app-uptask-backend-ts/commit/76b4c93dc64dfaa578b6b6f8f0a8972b8dbdc351)
 > > ### - Conectando nuestra app con MongoDB
-
+> > - [Creación/.env-Variables-Entorno&&url_Conexion](https://github.com/MilVG/app-uptask-backend-ts/commit/617a79d5974085d518ee9078e5529555a1ea6e2a)
+> > - [Creación/Directorios-Carpeta&&Archivo](https://github.com/MilVG/app-uptask-backend-ts/commit/fff61f03ac5fc9fda12a02b2f766c390f4594962)
+> > - [Incorporar/dotenv-Servidor](https://github.com/MilVG/app-uptask-backend-ts/commit/c489ea0adf44a906cdd6b1879ce07b197361560a)
+> > - [Implementacion/Concexion-MongoDB](https://github.com/MilVG/app-uptask-backend-ts/commit/3060ce19f502315beb0e6061ae52ba4fceee309d)
+> > - [Incorporacion/conexionDB-servidor](https://github.com/MilVG/app-uptask-backend-ts/commit/925c6e8c1c14eecc83ccf9a0616be5b4bfb580ed)
