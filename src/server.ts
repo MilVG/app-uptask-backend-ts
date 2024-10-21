@@ -7,6 +7,9 @@ dotenv.config()
 connectDB()
 const app = express()
 
+//agregando lectura en la consola de json
+app.use(express.json())
+
 //Routes
 app.use('/api/projects',ProjectRoutes)
 
