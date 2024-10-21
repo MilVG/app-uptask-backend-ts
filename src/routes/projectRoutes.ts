@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { ProjectController } from "../controllers/ProjectController";
 import { handleImputErrors } from "../middleware/validation";
 
@@ -14,6 +14,11 @@ router.post('/',
     .notEmpty().withMessage('El nombre de la descripcion es Obligatorio'),
   handleImputErrors,
   ProjectController.createProject)
-router.get('/',ProjectController.getAllProjects)
+router.get('/', ProjectController.getAllProjects)
+
+router.get('/:id',
+  param('id').isMongoId().withMessage('ID no válido'),
+  handleImputErrors,
+  ProjectController.getProjectById)
 
 export default router
