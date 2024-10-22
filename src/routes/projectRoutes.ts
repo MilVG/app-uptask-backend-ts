@@ -35,5 +35,9 @@ router.put('/:id',
   handleImputErrors,
   ProjectController.updateProject
 )
-
+router.delete('/:id',
+  param('id').isMongoId().withMessage('ID no válido'),
+  handleImputErrors,
+  ProjectController.deleteProject
+)
 export default router
