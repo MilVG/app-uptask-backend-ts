@@ -49,7 +49,7 @@ export class TaskController {
 
     try {
       const { taskId } = req.params
-      const task = await Task.findByIdAndUpdate(taskId, req.body)
+      const task = await Task.findById(taskId)
       if (!task) {
         const error = new Error('Tarea no encontrada')
         res.status(404).json({ error: error.message })
@@ -60,8 +60,10 @@ export class TaskController {
         res.status(404).json({ error: error.message })
         return
       }
-
-      res.json({ msg: 'Tarea actulizada correctamente' })
+      task.name = req.body.name
+      task.description = req.body.description
+      await task.save()
+      res.json({ msg: 'Tarea actualizada correctamente' })
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
       return
@@ -72,7 +74,7 @@ export class TaskController {
 
     try {
       const { taskId } = req.params
-      const task = await Task.findById(taskId, req.body)
+      const task = await Task.findById(taskId)
       if (!task) {
         const error = new Error('Tarea no encontrada')
         res.status(404).json({ error: error.message })
@@ -89,6 +91,25 @@ export class TaskController {
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
       return
+    }
+  }
+
+  static updateStatus = async (req: Request, res: Response) => {
+    try {
+      const { taskId } = req.params
+      const task = await Task.findById(taskId)
+      if (!task) {
+        const error = new Error('Tarea no encontrada')
+        res.status(404).json({ error: error.message })
+        return
+      }
+      const { status } = req.body
+      task.status = status
+      await task.save()
+      res.json({ msg: 'Tarea actualizada' })
+
+    } catch (error) {
+      res.status(500).json({ error: 'Hubo un error' })
     }
   }
 }
