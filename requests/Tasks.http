@@ -1,0 +1,61 @@
+# Listado de  tareas pertenecientes a un proyecto
+GET http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks
+
+###
+
+# Listado de Tarea Especifica
+GET http://localhost:4000/api/projects/6719321d6cd1c21ab8a9778b/tasks/6719339e6cd1c21ab8a97772
+
+###
+
+#Validacion envio de campos vacios
+POST http://localhost:4000/api/projects/67161e1862771068c41a19c467/tasks
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+{
+#     "name": "",
+#     "description": "Buscar el mejor framework de css para este proyecto"
+}
+
+
+###
+
+# Crear un Tarea *METODO POST*
+POST http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+    "name": "Definir framework para backend",
+    "description": "Buscar framework del lado del servidor con BD Postgress"
+}
+
+###
+
+# Actulizar una TArea *METODO PUT*
+PUT http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks/671933eb6cd1c21ab8a97776
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+  "name": "tarea actualizada",
+  "description": "Descripcion actualizada"
+}
+
+###
+
+# Actulizar un Project *METODO POST*
+POST http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks/671933eb6cd1c21ab8a97776/status
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+    "status":"inProgress"
+  }
+
+###
+
+# Eliminar Project *METODO DELETE*
+DELETE http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks/6719339e6cd1c21ab8a97772
+
+###
