@@ -4,7 +4,7 @@ import { ProjectController } from "../controllers/ProjectController";
 import { handleImputErrors } from "../middleware/validation";
 import { TaskController } from "../controllers/TaskController";
 import { validateProjectExists } from "../middleware/project";
-import { validateExistsTasks } from "../middleware/task";
+import { taskBelongsToProjects, validateExistsTasks } from "../middleware/task";
 
 const router = Router()
 
@@ -45,7 +45,6 @@ router.delete('/:id',
 )
 
 /* Routes for Tasks*/
-router.param('projectId', validateProjectExists)
 
 router.post('/:projectId/tasks',
   param('projectId').isMongoId().withMessage('ID no Válido'),
@@ -54,18 +53,24 @@ router.post('/:projectId/tasks',
   body('description')
     .notEmpty().withMessage('La descripcion de la tarea es Obligatoria'),
   handleImputErrors,
+  validateProjectExists,
   TaskController.createTask
 )
 
 router.get('/:projectId/tasks',
+  param('projectId').isMongoId().withMessage('ID no Válido'),
+  validateProjectExists,
   TaskController.getProjectTask
 )
 
-router.param('taskId', validateExistsTasks)
 
 router.get('/:projectId/tasks/:taskId',
+  param('projectId').isMongoId().withMessage('ID no Válido'),
   param('taskId').isMongoId().withMessage('ID no Válido'),
   handleImputErrors,
+  validateProjectExists,
+  validateExistsTasks,
+  taskBelongsToProjects,
   TaskController.getProjectTaskById
 )
 router.put('/:projectId/tasks/:taskId',
@@ -75,17 +80,26 @@ router.put('/:projectId/tasks/:taskId',
   body('description')
     .notEmpty().withMessage('La descripcion de la tarea es Obligatoria'),
   handleImputErrors,
+  validateProjectExists,
+  validateExistsTasks,
+  taskBelongsToProjects,
   TaskController.updateTask
 )
 router.delete('/:projectId/tasks/:taskId',
   param('taskId').isMongoId().withMessage('ID no Válido'),
   handleImputErrors,
+  validateProjectExists,
+  validateExistsTasks,
+  taskBelongsToProjects,
   TaskController.getProjectTaskByIdDelete
 )
 router.post('/:projectId/tasks/:taskId/status',
   param('taskId').isMongoId().withMessage('ID no Válido'),
   body('status').notEmpty().withMessage('El estado es obligatorio'),
   handleImputErrors,
+  validateProjectExists,
+  validateExistsTasks,
+  taskBelongsToProjects,
   TaskController.updateStatus
 )
 export default router

@@ -25,3 +25,11 @@ export const validateExistsTasks = async (req: Request, res: Response, next: Nex
 
   }
 }
+export const taskBelongsToProjects = async (req: Request, res: Response, next: NextFunction) => {
+  if (req.task.project.toString() !== req.project.id) {
+    const error = new Error('Acción no válida')
+    res.status(404).json({ error: error.message })
+    return
+  }
+  next()
+}

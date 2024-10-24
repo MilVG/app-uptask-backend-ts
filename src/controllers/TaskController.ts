@@ -26,12 +26,6 @@ export class TaskController {
   static getProjectTaskById = async (req: Request, res: Response) => {
 
     try {
-      if (req.task.project.toString() !== req.project.id) {
-        const error = new Error('Acción no válida')
-        res.status(404).json({ error: error.message })
-        return
-      }
-
       res.json(req.task)
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
@@ -41,11 +35,6 @@ export class TaskController {
   static updateTask = async (req: Request, res: Response) => {
 
     try {
-      if (req.task.project.toString() !== req.project.id) {
-        const error = new Error('Acción no válida')
-        res.status(404).json({ error: error.message })
-        return
-      }
       req.task.name = req.body.name
       req.task.description = req.body.description
       await req.task.save()
@@ -59,11 +48,6 @@ export class TaskController {
   static getProjectTaskByIdDelete = async (req: Request, res: Response) => {
 
     try {
-      if (req.task.project.toString() !== req.project.id) {
-        const error = new Error('Acción no válida')
-        res.status(404).json({ error: error.message })
-        return
-      }
       req.project.tasks = req.project.tasks.filter(task => task._id !== req.task.id)
       await Promise.allSettled([req.task.deleteOne(), req.project.save()])
       res.json({ msg: 'Tarea Eliminada correctamente' })
