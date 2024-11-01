@@ -6,7 +6,7 @@ import Token from "../models/Token"
 import { AuthEmail } from "../emails/AuthEmail"
 export class AuthController {
 
-  static createAccount = async (req: Request, res: Response) => {
+  static createAccount = async (req: Request, res: Response): Promise<void> => {
     try {
 
       const { password, email } = req.body
@@ -15,7 +15,8 @@ export class AuthController {
       const userExists = await User.findOne({ email })
       if (userExists) {
         const error = new Error('El Usuario ya está registrado')
-        return res.status(409).json({ error: error.message })
+        res.status(409).json({ error: error.message })
+        return
       }
 
       //Crear Usuario
@@ -37,7 +38,15 @@ export class AuthController {
         token: token.token
       })
       await Promise.allSettled([user.save(), token.save()])
-      res.json({ msg: 'usuario Creado correctamente' })
+      res.send(' usuario Creado correctamente')
+
+    } catch (error) {
+      res.status(500).json({ error: 'Hubo un error' })
+      return
+    }
+  }
+  static confirmAccount = async (req: Request, res: Response) => {
+    try {
 
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
