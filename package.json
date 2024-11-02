@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec tsx src/index",
-    "dev:api": "nodemon --exec tsx src/index --api"
+    "dev": "nodemon --ext ts,tsx --exec tsx src/index",
+    "dev:api": "nodemon --ext ts,tsx --exec tsx src/index --api"
   },
   "keywords": [],
   "author": "",
