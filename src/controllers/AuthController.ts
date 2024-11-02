@@ -38,16 +38,27 @@ export class AuthController {
         token: token.token
       })
       await Promise.allSettled([user.save(), token.save()])
-      res.send(' usuario Creado correctamente')
+      res.json({
+        msg:'usuario Creado Correctamente',
+        user:user
+      })
 
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
-      return
     }
   }
   static confirmAccount = async (req: Request, res: Response) => {
     try {
 
+      const {token} = req.body
+      
+      const tokenExists = await Token.findOne({token})
+      if (!tokenExists) {
+        const error = new Error('token no válido')
+        res.status(401).json({error:error.message})
+        return
+      }
+      res.send('el token valido')
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
     }
