@@ -58,7 +58,11 @@ export class AuthController {
         res.status(401).json({error:error.message})
         return
       }
-      res.send('el token valido')
+      const user  = await User.findById(tokenExists.user)
+      user.confirmed = true
+
+      await Promise.allSettled([user.save(),tokenExists.deleteOne()])
+      res.json({msg:'Cuenta confirmada Correctamente'})
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
     }
