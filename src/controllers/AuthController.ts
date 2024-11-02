@@ -39,8 +39,8 @@ export class AuthController {
       })
       await Promise.allSettled([user.save(), token.save()])
       res.json({
-        msg:'usuario Creado Correctamente',
-        user:user
+        msg: 'usuario Creado Correctamente',
+        user: user
       })
 
     } catch (error) {
@@ -50,35 +50,55 @@ export class AuthController {
   static confirmAccount = async (req: Request, res: Response) => {
     try {
 
-      const {token} = req.body
-      
-      const tokenExists = await Token.findOne({token})
+      const { token } = req.body
+
+      const tokenExists = await Token.findOne({ token })
       if (!tokenExists) {
         const error = new Error('token no válido')
-        res.status(401).json({error:error.message})
+        res.status(404).json({ error: error.message })
         return
       }
-      const user  = await User.findById(tokenExists.user)
+      const user = await User.findById(tokenExists.user)
       user.confirmed = true
 
-      await Promise.allSettled([user.save(),tokenExists.deleteOne()])
-      res.json({msg:'Cuenta confirmada Correctamente'})
+      await Promise.allSettled([user.save(), tokenExists.deleteOne()])
+      res.json({ msg: 'Cuenta confirmada Correctamente' })
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
     }
   }
   static login = async (req: Request, res: Response) => {
-    
+
     try {
 
-      const {email,password} = req.body
-      const user = await User.findOne({email})
+      const { email, password } = req.body
+      
+      const user = await User.findOne({ email })
       if (!user) {
         const error = new Error('Usuario no encontrado')
-        res.status(401).json({error:error.message})
+        res.status(404).json({ error: error.message })
+        return
       }
-      res.send('iniciando session..')
+      if (!user.confirmed) {
+        const token = new Token()
+        token.user = user.id
+        token.token = generateToken()
+        await token.save()
+
+        //enviar email
+        AuthEmail.sendConfirmationEmail({
+          email: user.email,
+          name: user.name,
+          token: token.token
+        })
+        const error = new Error('La Cuenta no ha sido Confirmada, hemos enviado un e-mail de confirmacion')
+        res.status(404).json({ error: error.message })
+        return
+      }
+
+      res.send('algo ocurrió')
       return
+
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
     }
