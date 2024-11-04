@@ -96,7 +96,7 @@ export class AuthController {
         res.status(404).json({ error: error.message });
         return;
       }
-      res.send("Autenticando...");
+      res.json({msg:"Autenticacion correcta Iniciando sesion...."});
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
