@@ -96,7 +96,7 @@ export class AuthController {
         res.status(404).json({ error: error.message });
         return;
       }
-      res.json({msg:"Autenticacion correcta Iniciando sesion...."});
+      res.json({ msg: "Autenticacion correcta Iniciando sesion...." });
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
@@ -132,6 +132,36 @@ export class AuthController {
       });
       await Promise.allSettled([user.save(), token.save()]);
       res.json({ msg: "Se envió un nuevo token a tu email" });
+    } catch (error) {
+      res.status(500).json({ error: "Hubo un error" });
+    }
+  };
+  static forgotPassword = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      //Usuario existe
+      const user = await User.findOne({ email });
+      if (!user) {
+        const error = new Error(" El usuario no está registrado");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      //Generar Token
+
+      const token = new Token();
+      token.token = generateToken();
+      token.user = user.id;
+      await token.save()
+
+      //enviar email
+      AuthEmail.sendPasswordResetToken({
+        email: user.email,
+        name: user.name,
+        token: token.token,
+      });
+      res.json({ msg: "Revisa tu email para instrucciones" });
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
