@@ -5,6 +5,7 @@ import { generateToken } from "../utils/token";
 import Token from "../models/Token";
 import { AuthEmail } from "../emails/AuthEmail";
 import { generateJWT } from "../utils/jwt";
+import { Types } from "mongoose";
 export class AuthController {
   static createAccount = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -62,6 +63,7 @@ export class AuthController {
     }
   };
   static login = async (req: Request, res: Response) => {
+
     try {
       const { email, password } = req.body;
 
@@ -99,7 +101,7 @@ export class AuthController {
       }
 
       //Generando JWT
-      const token = generateJWT()
+      const token = generateJWT({ id: user._id as Types.ObjectId })
 
       res.send(token);
     } catch (error) {
