@@ -103,7 +103,7 @@ export class AuthController {
       //Generando JWT
       const token = generateJWT({ id: user._id as Types.ObjectId })
 
-      res.send(token);
+      res.json({ msg: token });
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
