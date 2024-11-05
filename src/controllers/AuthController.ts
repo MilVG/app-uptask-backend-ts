@@ -4,6 +4,8 @@ import { checkPassword, hashPassword } from "../utils/auth";
 import { generateToken } from "../utils/token";
 import Token from "../models/Token";
 import { AuthEmail } from "../emails/AuthEmail";
+import { generateJWT } from "../utils/jwt";
+import { Types } from "mongoose";
 export class AuthController {
   static createAccount = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -61,6 +63,7 @@ export class AuthController {
     }
   };
   static login = async (req: Request, res: Response) => {
+
     try {
       const { email, password } = req.body;
 
@@ -96,7 +99,11 @@ export class AuthController {
         res.status(404).json({ error: error.message });
         return;
       }
-      res.json({ msg: "Autenticacion correcta Iniciando sesion...." });
+
+      //Generando JWT
+      const token = generateJWT({ id: user._id as Types.ObjectId })
+
+      res.json({ msg: token });
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
