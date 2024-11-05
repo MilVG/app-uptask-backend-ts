@@ -42,6 +42,11 @@ export class ProjectController {
         res.status(404).json({ error: error.message })
         return
       }
+      //Autorizacion jwt projecto especifico manager
+      if (project.manager.toString() !== req.user.id.toString()) {
+        const error = new Error('Acción no válida')
+        res.status(404).json({ error: error.message })
+      }
       res.json(project)
     } catch (error) {
       console.log(error);
@@ -60,6 +65,11 @@ export class ProjectController {
         const error = new Error('Proyecto no Encontrado')
         res.status(404).json({ error: error.message })
         return
+      }
+      //Autorizacion jwt projecto para ctulizar solo el manager
+      if (project.manager.toString() !== req.user.id.toString()) {
+        const error = new Error('Solo el Manager puede actulizar un Proyecto')
+        res.status(404).json({ error: error.message })
       }
       await project.save()
       res.json({ msg: 'proyecto actualizado' })
@@ -80,6 +90,12 @@ export class ProjectController {
         res.status(404).json({ error: error.message })
         return
       }
+      //Autorizacion jwt solo el manager puede eliminar un projecto
+      if (project.manager.toString() !== req.user.id.toString()) {
+        const error = new Error('Solo el Manager puede eliminar un proyecto')
+        res.status(404).json({ error: error.message })
+      }
+
       await project.deleteOne()
       res.json({ msg: 'proyecto Eliminado' })
     } catch (error) {
