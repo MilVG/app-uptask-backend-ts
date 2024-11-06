@@ -6,6 +6,7 @@ import { TaskController } from "../controllers/TaskController";
 import { validateProjectExists } from "../middleware/project";
 import { taskBelongsToProjects, validateExistsTasks } from "../middleware/task";
 import { authenticate } from "../middleware/auth";
+import { TeamMemberController } from "../controllers/TeamController";
 
 const router = Router()
 
@@ -103,5 +104,11 @@ router.patch('/:projectId/tasks/:taskId/status',
   validateExistsTasks,
   taskBelongsToProjects,
   TaskController.updateStatus
+)
+router.post('/:projectId/team/find',
+  body('email')
+    .isEmail().toLowerCase().withMessage('E-mail no válido'),
+  handleImputErrors,
+  TeamMemberController.findMemberByEmail
 )
 export default router
