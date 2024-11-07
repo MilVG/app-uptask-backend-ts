@@ -105,11 +105,17 @@ router.patch('/:projectId/tasks/:taskId/status',
   taskBelongsToProjects,
   TaskController.updateStatus
 )
+
+/** Routes Teams */
 router.post('/:projectId/team/find',
   body('email')
     .isEmail().toLowerCase().withMessage('E-mail no válido'),
   handleImputErrors,
   TeamMemberController.findMemberByEmail
+)
+router.get('/:projectId/team',
+  validateProjectExists,
+  TeamMemberController.getProjectTeam
 )
 router.post('/:projectId/team',
   body('id')
@@ -117,5 +123,12 @@ router.post('/:projectId/team',
   handleImputErrors,
   validateProjectExists,
   TeamMemberController.AddMemberById
+)
+router.delete('/:projectId/team',
+  body('id')
+    .isMongoId().withMessage('ID no válido'),
+  handleImputErrors,
+  validateProjectExists,
+  TeamMemberController.RemoveMemberById
 )
 export default router
