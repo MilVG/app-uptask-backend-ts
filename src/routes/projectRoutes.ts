@@ -74,6 +74,7 @@ router.get('/:projectId/tasks/:taskId',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
+  hasAuthorization,
   taskBelongsToProjects,
   TaskController.getProjectTaskById
 )
