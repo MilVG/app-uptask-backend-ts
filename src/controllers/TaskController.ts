@@ -26,7 +26,8 @@ export class TaskController {
   static getProjectTaskById = async (req: Request, res: Response) => {
 
     try {
-      res.json(req.task)
+      const task = await Task.findById(req.task.id).populate({ path: 'completedBy', select: 'name email _id' })
+      res.json(task)
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
       return
@@ -61,11 +62,12 @@ export class TaskController {
     try {
       const { status } = req.body
       req.task.status = status
-      if (status === 'pending') {
-        req.task.completedBy = null
-      } else {
-        req.task.completedBy = req.user.id
+
+      const data = {
+        user: req.user.id,
+        status
       }
+      req.task.completedBy.push(data)
       await req.task.save()
       res.json({ msg: 'Status Tarea actualizada' })
 
