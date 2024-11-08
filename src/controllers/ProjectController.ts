@@ -44,7 +44,7 @@ export class ProjectController {
         return
       }
       //Autorizacion jwt projecto especifico manager
-      if (project.manager.toString() !== req.user.id.toString()) {
+      if (project.manager.toString() !== req.user.id.toString() && !project.team.includes(req.user.id)) {
         const error = new Error('Acción no válida')
         res.status(404).json({ error: error.message })
       }
