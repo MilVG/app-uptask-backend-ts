@@ -74,7 +74,6 @@ router.get('/:projectId/tasks/:taskId',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
-  hasAuthorization,
   taskBelongsToProjects,
   TaskController.getProjectTaskById
 )
@@ -106,7 +105,6 @@ router.patch('/:projectId/tasks/:taskId/status',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
-  hasAuthorization,
   taskBelongsToProjects,
   TaskController.updateStatus
 )
