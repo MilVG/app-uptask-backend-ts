@@ -105,7 +105,6 @@ router.patch('/:projectId/tasks/:taskId/status',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
-  hasAuthorization,
   taskBelongsToProjects,
   TaskController.updateStatus
 )
