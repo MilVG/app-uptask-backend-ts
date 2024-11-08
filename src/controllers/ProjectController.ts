@@ -21,7 +21,8 @@ export class ProjectController {
     try {
       const projects = await Project.find({
         $or: [
-          { manager: { $in: req.user.id } }
+          { manager: { $in: req.user.id } },
+          { team: { $in: req.user.id } }
         ]
       })
       res.json(projects)
