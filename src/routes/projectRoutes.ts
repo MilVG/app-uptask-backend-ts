@@ -4,7 +4,7 @@ import { ProjectController } from "../controllers/ProjectController";
 import { handleImputErrors } from "../middleware/validation";
 import { TaskController } from "../controllers/TaskController";
 import { validateProjectExists } from "../middleware/project";
-import { taskBelongsToProjects, validateExistsTasks } from "../middleware/task";
+import { hasAuthorization, taskBelongsToProjects, validateExistsTasks } from "../middleware/task";
 import { authenticate } from "../middleware/auth";
 import { TeamMemberController } from "../controllers/TeamController";
 
@@ -57,6 +57,7 @@ router.post('/:projectId/tasks',
     .notEmpty().withMessage('La descripcion de la tarea es Obligatoria'),
   handleImputErrors,
   validateProjectExists,
+  hasAuthorization,
   TaskController.createTask
 )
 
@@ -85,6 +86,7 @@ router.put('/:projectId/tasks/:taskId',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
+  hasAuthorization,
   taskBelongsToProjects,
   TaskController.updateTask
 )
@@ -93,6 +95,7 @@ router.delete('/:projectId/tasks/:taskId',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
+  hasAuthorization,
   taskBelongsToProjects,
   TaskController.getProjectTaskByIdDelete
 )
@@ -102,6 +105,7 @@ router.patch('/:projectId/tasks/:taskId/status',
   handleImputErrors,
   validateProjectExists,
   validateExistsTasks,
+  hasAuthorization,
   taskBelongsToProjects,
   TaskController.updateStatus
 )
