@@ -141,6 +141,8 @@ router.post('/:projectId/tasks/:taskId/notes',
   body('content')
     .notEmpty().withMessage('El contenido de la nota es obligatorio'),
   handleImputErrors,
+  validateProjectExists,
+  validateExistsTasks,
   NoteController.createNote
 )
 export default router
