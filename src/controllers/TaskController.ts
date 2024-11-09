@@ -49,8 +49,9 @@ export class TaskController {
   static getProjectTaskByIdDelete = async (req: Request, res: Response) => {
 
     try {
-      req.project.tasks = req.project.tasks.filter(task => task._id !== req.task.id)
-      await Promise.allSettled([req.task.deleteOne(), req.project.save()])
+      req.project.tasks = req.project.tasks.filter(task => task._id.toString() !== req.task.id.toString())
+      await req.task.deleteOne()
+      await req.project.save()
       res.json({ msg: 'Tarea Eliminada correctamente' })
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
