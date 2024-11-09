@@ -14,7 +14,7 @@ export const validateExistsTasks = async (req: Request, res: Response, next: Nex
     const { taskId } = req.params
     const task = await Task.findById(taskId)
     if (!task) {
-      const error = new Error('Proyecto no Encontrado')
+      const error = new Error('Tarea no Encontrado')
       res.status(404).json({ error: error.message })
       return
     }
