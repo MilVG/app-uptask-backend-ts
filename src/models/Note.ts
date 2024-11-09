@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface INote extends Document {
   content: string
-  createBy: Types.ObjectId
+  createdBy: Types.ObjectId
   task: Types.ObjectId
 }
 
@@ -19,7 +19,6 @@ const NoteSchema: Schema = new Schema({
   task: {
     type: Types.ObjectId,
     ref: 'Task',
-    required: true
   }
 }, { timestamps: true })
 
