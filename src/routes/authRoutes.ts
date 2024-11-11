@@ -86,4 +86,20 @@ router.put('/profile',
     .isEmail().withMessage('E-mail no válido'),
   AuthController.updateProfile
 )
+
+router.post('/profile/password',
+  authenticate,
+  body('current_password')
+    .notEmpty().withMessage('El password actual no puede ir vacio'),
+  body('password')
+    .isLength({ min: 8 }).withMessage('El password es muy corto, min 8 caracteres'),
+  body('password_confirmation').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Los Passoword no son iguales')
+    }
+    return true
+  }),
+  handleImputErrors,
+  AuthController.updateCurrentUserPassword
+)
 export default router
