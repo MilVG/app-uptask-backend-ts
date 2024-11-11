@@ -1,0 +1,26 @@
+# Obtener Notas
+GET http://localhost:4000/api/projects/673248a4f2d70d136e88c5be/tasks/673248daf2d70d136e88c5d9/notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
+
+###
+
+
+# Create Note
+POST http://localhost:4000/api/projects/672c48d7b8ef29d3b148b1af/tasks/672fd48006ffe4d3a2b723b5/notes
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
+
+{
+  "content":"creando Tercera Nota"
+  
+  }
+
+###
+
+# Eliminar Notas
+DELETE http://localhost:4000/api/projects/672c48d7b8ef29d3b148b1af/tasks/672fd48006ffe4d3a2b723b5/notes/672fdecd7f840cd253b10d6f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
+
+###
+

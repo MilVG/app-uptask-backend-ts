@@ -1,33 +1,36 @@
 # Listado de  tareas pertenecientes a un proyecto
-GET http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks
+GET http://localhost:4000/api/projects/672c48d7b8ef29d3b148b1af/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
 
 ###
 
 # Listado de Tarea Especifica
-GET http://localhost:4000/api/projects/6719321d6cd1c21ab8a9778b/tasks/6719339e6cd1c21ab8a97772
-
+GET http://localhost:4000/api/projects/672c48d7b8ef29d3b148b1af/tasks/672fd48006ffe4d3a2b723b5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
 ###
 
 #Validacion envio de campos vacios
-POST http://localhost:4000/api/projects/67161e1862771068c41a19c467/tasks
+POST http://localhost:4000/api/projects/672a7a273fff4fae4bb53bc3/tasks
 Content-Type: application/json
 Accept-Language:en-US,en;q=0.5
+
 {
-#     "name": "",
-#     "description": "Buscar el mejor framework de css para este proyecto"
+  "name": "",
+  "description": "Buscar el mejor framework de css para este proyecto"
 }
 
 
 ###
 
 # Crear un Tarea *METODO POST*
-POST http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks
+POST http://localhost:4000/api/projects/672be573ffea8d55f59a5a70/tasks
 Content-Type: application/json
 Accept-Language:en-US,en;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
 
 {
-    "name": "Definir framework para backend",
-    "description": "Buscar framework del lado del servidor con BD Postgress"
+    "name": "Definir framework para backend 3",
+    "description": "Buscar framework del lado del servidor con BD Postgress 3"
 }
 
 ###
@@ -56,6 +59,7 @@ Accept-Language:en-US,en;q=0.5
 ###
 
 # Eliminar Project *METODO DELETE*
-DELETE http://localhost:4000/api/projects/671931db6cd1c21ab8a97769/tasks/6719339e6cd1c21ab8a97772
+DELETE http://localhost:4000/api/projects/672be573ffea8d55f59a5a70/tasks/672fa95aa137c84d4ec02863
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
 
 ###
