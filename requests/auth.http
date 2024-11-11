@@ -1,0 +1,108 @@
+# Autenticacion de usuarios.
+# Metodod POST Crear usuario
+POST http://localhost:4000/api/auth/create-account
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+  "name":"conejita",
+  "password":"12345678",
+  "email":"conejita@correo.com",
+  "password_confirmation":"12345678"
+}
+
+###
+
+# Confirmar Cuenta Validacion Token 
+POST http://localhost:4000/api/auth/confirm-account
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+  "token":"997946"
+}
+
+###
+
+# login initial session
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+  "email":"correo@correo.com",
+  "password":"password"
+}
+
+###
+
+# requeest new token
+POST http://localhost:4000/api/auth/request-code
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+ "email":"conejita@correo.com"
+}
+
+###
+
+# Forgot password
+POST http://localhost:4000/api/auth/forgot-password
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+ "email":"correo@correo.com"
+}
+
+###
+
+# Validate Token for password
+POST http://localhost:4000/api/auth/validate-token
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+ "token":"349527"
+}
+
+###
+
+# Set new password - Update
+POST http://localhost:4000/api/auth/update-password/306742
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+
+{
+ "password":"password",
+ "password_confirmation":"password"
+}
+
+###
+
+#  User -get Authenticated
+GET http://localhost:4000/api/auth/user
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsIm5hbWUiOiJQZWRybyByZXZlcnMiLCJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwiaWF0IjoxNzMwOTExMjg2LCJleHAiOjE3MzIyMDcyODZ9.qGsrDYpmPgzOoPAZJSf6O20XPqvkj9VR4mQzz3f1tec
+
+{
+  "email":"correo@correo.com",
+  "password":"password"
+}
+
+###
+
+# check password
+POST http://localhost:4000/api/auth/check-password
+Content-Type: application/json
+Accept-Language:en-US,en;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjdkZTcwZjNkYmNhYmQ4YzZjMDVmNSIsImlhdCI6MTczMDgzMDA1MiwiZXhwIjoxNzMyMTI2MDUyfQ._KvmkvtSFQK0dRp8pzKqQJzxMvlf2i7KK_iYP87xp54
+
+{
+ "password":"password"
+}
+
+###
+
