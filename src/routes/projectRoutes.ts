@@ -153,6 +153,7 @@ router.get('/:projectId/tasks/:taskId/notes',
 router.delete('/:projectId/tasks/:taskId/notes/:noteId',
   param('noteId').isMongoId().withMessage('ID No Válido'),
   handleImputErrors,
+  validateExistsTasks,
   NoteController.removeNote
 )
 export default router
