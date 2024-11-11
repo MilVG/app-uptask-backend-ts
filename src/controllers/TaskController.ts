@@ -26,7 +26,9 @@ export class TaskController {
   static getProjectTaskById = async (req: Request, res: Response) => {
 
     try {
-      const task = await Task.findById(req.task.id).populate({ path: 'completedBy.user', select: 'name email _id' })
+      const task = await Task.findById(req.task.id)
+        .populate({ path: 'completedBy.user', select: 'name email _id' })
+        .populate({ path: 'notes', populate: { path: 'createdBy', select: 'id name email' } })
       res.json(task)
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
@@ -49,8 +51,9 @@ export class TaskController {
   static getProjectTaskByIdDelete = async (req: Request, res: Response) => {
 
     try {
-      req.project.tasks = req.project.tasks.filter(task => task._id !== req.task.id)
-      await Promise.allSettled([req.task.deleteOne(), req.project.save()])
+      req.project.tasks = req.project.tasks.filter(task => task._id.toString() !== req.task.id.toString())
+      await req.task.deleteOne()
+      await req.project.save()
       res.json({ msg: 'Tarea Eliminada correctamente' })
     } catch (error) {
       res.status(500).json({ error: 'Hubo un error' })
